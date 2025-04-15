@@ -1,19 +1,9 @@
 import "./App.css";
-import { useEffect, useState, useRef } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import TaskItem from "./components/TaskItem";
 
 const App = () => {
-    const mounted = useRef(false);
-
-    //ciclo de vida do componente = componente atualizado
-    useEffect(() => {
-        if (mounted.current === false) {
-            mounted.current = true;
-        } else {
-            console.log("component was updated");
-        }
-    });
-
     const [tasks, setTasks] = useState([
         {
             id: "1",
@@ -29,9 +19,19 @@ const App = () => {
         },
     ]);
 
-    const handleCleanTasks = () => {
-        setTasks([]);
+    const fetchTasks = async () => {
+        try {
+            //data é onde estão as tarefas
+            const { data } = await axios.get("http://localhost:8000/tasks");
+            setTasks(data);
+        } catch (error) {
+            console.log(error);
+        }
     };
+
+    useEffect(() => {
+        fetchTasks();
+    }, []);
 
     return (
         <>
@@ -39,7 +39,6 @@ const App = () => {
                 //necessita identificador unico = o id
                 <TaskItem key={task.id} tarefa={task} />
             ))}
-            <button onClick={handleCleanTasks}>Limpar tarefas</button>
         </>
     );
 };

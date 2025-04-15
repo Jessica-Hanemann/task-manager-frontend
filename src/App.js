@@ -1,8 +1,19 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import TaskItem from "./components/TaskItem";
 
 const App = () => {
+    const mounted = useRef(false);
+
+    //ciclo de vida do componente = componente atualizado
+    useEffect(() => {
+        if (mounted.current === false) {
+            mounted.current = true;
+        } else {
+            console.log("component was updated");
+        }
+    });
+
     const [tasks, setTasks] = useState([
         {
             id: "1",
@@ -18,12 +29,17 @@ const App = () => {
         },
     ]);
 
+    const handleCleanTasks = () => {
+        setTasks([]);
+    };
+
     return (
         <>
             {tasks.map((task) => (
                 //necessita identificador unico = o id
                 <TaskItem key={task.id} tarefa={task} />
             ))}
+            <button onClick={handleCleanTasks}>Limpar tarefas</button>
         </>
     );
 };

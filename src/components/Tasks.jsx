@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./Tasks.scss";
+import TaskItem from "./TaskItem";
 
 const Tasks = () => {
     const [tasks, setTasks] = useState([]);
@@ -28,7 +29,7 @@ const Tasks = () => {
                     {tasks
                         .filter((task) => task.isCompleted === false)
                         .map((lastTask) => (
-                            <p>{lastTask.description}</p>
+                            <TaskItem tarefa={lastTask} />
                         ))}
                 </div>
             </div>
@@ -38,7 +39,7 @@ const Tasks = () => {
                     {tasks
                         .filter((task) => task.isCompleted === true)
                         .map((completedTask) => (
-                            <p>{completedTask.description}</p>
+                            <TaskItem tarefa={completedTask} />
                         ))}
                 </div>
             </div>

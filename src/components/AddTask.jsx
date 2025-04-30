@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import CustomButtom from "./CustomButton";
 import "./AddTask.scss";
 
-const AddTask = () => {
+const AddTask = ({ fetchTasks }) => {
     const [taskDescription, setTaskDescription] = useState("");
 
     // const alert = useAlert();
@@ -27,7 +27,11 @@ const AddTask = () => {
                 description: taskDescription,
                 isCompleted: false,
             });
-        } catch (error) {}
+            await fetchTasks();
+            setTaskDescription("");
+        } catch (error) {
+            return toast.error("Algo deu errado!");
+        }
     };
 
     return (

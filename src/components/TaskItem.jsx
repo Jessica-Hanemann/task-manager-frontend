@@ -15,6 +15,21 @@ const TaskItem = (props) => {
             return toast.error("Algo deu errado no delete!");
         }
     };
+
+    const handleTaskCompletionChange = async (e) => {
+        try {
+            await axios.patch(
+                `http://localhost:8000/tasks/${props.tarefa._id}`,
+                {
+                    isCompleted: e.target.checked,
+                }
+            );
+            await props.fetchTasks();
+            return toast.success("Tarefa modificada com sucesso");
+        } catch (error) {
+            return toast.error("Algo deu errado na modificação!");
+        }
+    };
     return (
         <>
             <div className="task-item-container">
@@ -30,6 +45,7 @@ const TaskItem = (props) => {
                         <input
                             type="checkbox"
                             defaultChecked={props.tarefa.isCompleted}
+                            onChange={(e) => handleTaskCompletionChange(e)}
                         />
                         <span
                             className={

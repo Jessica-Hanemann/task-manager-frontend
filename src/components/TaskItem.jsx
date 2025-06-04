@@ -7,7 +7,7 @@ const TaskItem = (props) => {
     const handleTaskDeletion = async () => {
         try {
             await axios.delete(
-                `http://localhost:8000/tasks/${props.tarefa._id}`
+                `${process.env.REACT_APP_API_URL}/tasks/${props.tarefa._id}`
             );
             await props.fetchTasks();
             return toast.success("Tarefa deletada");
@@ -19,7 +19,7 @@ const TaskItem = (props) => {
     const handleTaskCompletionChange = async (e) => {
         try {
             await axios.patch(
-                `http://localhost:8000/tasks/${props.tarefa._id}`,
+                `${process.env.REACT_APP_API_URL}/tasks/${props.tarefa._id}`,
                 {
                     isCompleted: e.target.checked,
                 }

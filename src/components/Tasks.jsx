@@ -13,7 +13,9 @@ const Tasks = () => {
     const fetchTasks = useCallback(async () => {
         try {
             //data é onde estão as tarefas
-            const { data } = await axios.get("http://localhost:8000/tasks");
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_API_URL}/tasks`
+            );
             setTasks(data);
         } catch (_error) {
             return toast.error("Não foi possível recuperar as tarefas!");

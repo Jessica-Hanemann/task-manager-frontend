@@ -23,7 +23,7 @@ const AddTask = ({ fetchTasks }) => {
                     "A tarefa precisa de uma descrição para ser adicionada!"
                 );
             }
-            await axios.post("http://localhost:8000/tasks", {
+            await axios.post(`${process.env.REACT_APP_API_URL}/tasks`, {
                 description: taskDescription,
                 isCompleted: false,
             });

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import "./Tasks.scss";
 import TaskItem from "./TaskItem";
 import AddTask from "./AddTask";
@@ -12,8 +13,8 @@ const Tasks = () => {
             //data é onde estão as tarefas
             const { data } = await axios.get("http://localhost:8000/tasks");
             setTasks(data);
-        } catch (error) {
-            console.log(error);
+        } catch (_error) {
+            return toast.error("Não foi possível recuperar as tarefas!");
         }
     };
 

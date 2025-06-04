@@ -11,7 +11,7 @@ const TaskItem = (props) => {
             );
             await props.fetchTasks();
             return toast.success("Tarefa deletada");
-        } catch (error) {
+        } catch (_error) {
             return toast.error("Algo deu errado no delete!");
         }
     };
@@ -26,7 +26,7 @@ const TaskItem = (props) => {
             );
             await props.fetchTasks();
             return toast.success("Tarefa modificada com sucesso");
-        } catch (error) {
+        } catch (_error) {
             return toast.error("Algo deu errado na modificação!");
         }
     };

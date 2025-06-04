@@ -3,27 +3,29 @@ import ReactDOM from "react-dom/client";
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals"; // medir performance
+import { BrowserRouter } from "react-router-dom";
 
 import { ToastContainer, Bounce } from "react-toastify";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <ToastContainer
-            position="bottom-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-            transition={Bounce}
-        />
-
-        <App />
+        <BrowserRouter>
+            <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition={Bounce}
+            ></ToastContainer>
+            <App />
+        </BrowserRouter>
     </React.StrictMode>
 );
 
